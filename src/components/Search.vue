@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit">
+  <form @submit.prevent="submit">
     <input :class="{error: reqError || inputError}" type="text" v-model="location" />
     <button hidden type="submit" />
   </form>
@@ -17,6 +17,13 @@ export default {
     }
   },
 
+  props: {
+    onSubmit: {
+      type: Function,
+      required: true
+    }
+  },
+
   watch: {
     location() {
       this.reqError = false
@@ -31,7 +38,7 @@ export default {
   },
 
   methods: {
-    async onSubmit() {
+    async submit() {
       const resp = await weatherApi.getCityWeatherByPeriod(this.location)
       
       if(resp.message) {
@@ -39,6 +46,7 @@ export default {
         this.reqError = true
       }
       else {
+        this.onSubmit(resp)
         this.reqError = false
       }
     }

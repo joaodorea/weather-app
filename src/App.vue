@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Search />
+    <Search :onSubmit="onSubmit" />
   </div>
 </template>
 
@@ -15,6 +15,12 @@ export default {
 
   data(){
     return {}
+  },
+
+  methods: {
+    onSubmit(apiResponse) {
+      console.log(apiResponse)
+    }
   }
 }
 </script>
