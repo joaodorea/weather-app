@@ -1,25 +1,30 @@
 <template>
   <div id="app">
     <Search :onSubmit="onSubmit" />
+    <Weather v-if="weatherInfo" :info="weatherInfo" />
   </div>
 </template>
 
 <script>
 import Search from './components/Search.vue'
+import Weather from './components/Weather.vue'
 
 export default {
   name: 'App',
   components: {
-    Search
+    Search,
+    Weather
   },
 
   data(){
-    return {}
+    return {
+      weatherInfo: null
+    }
   },
 
   methods: {
     onSubmit(apiResponse) {
-      console.log(apiResponse)
+      this.weatherInfo = apiResponse
     }
   }
 }
