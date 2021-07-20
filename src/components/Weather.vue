@@ -2,56 +2,55 @@
   <div id="weather">
     <div class="column">
       <div class="current-state">
-        <!-- <img alt="sun" /> -->
         <SunIcon class="current-state-icon" />
         <!-- <CloudRainIcon />
         <CloudIcon />
         <SnowIcon />
         <RainIcon /> -->
-        <p class="current-state-label">{{ "Clear sky" }}</p>
+        <p class="current-state-label">{{ info.weather[0].description }}</p>
       </div>
     </div>
 
     <div class="column">
-      <div class="temp">{{ "22" }}ºC</div>
+      <div class="temp">{{ info.temp }}ºC</div>
 
       <div class="min-and-max">
         <div>
           <p class="label">min</p>
-          <p class="temp">{{ "21" }}º</p>
+          <p class="temp">{{ info.temp_min }}º</p>
         </div>
 
         <div>
           <p class="label">max</p>
-          <p class="temp">{{ "28" }}º</p>
+          <p class="temp">{{ info.temp_max }}º</p>
         </div>
       </div>
 
-      <div @click="toggleMoreInfo" class="more-info-toggle">
+      <div @click="toggleMoreInfo" class="more-info-toggle" :class="{ open: showMoreInfo }">
         {{ toggleText }}
         <ArrowUpIcon class="icon" />
       </div>
 
-      <div class="more-info">
+      <div class="more-info" :class="{hidden: showMoreInfo}">
         <div class="item">
           <WindIcon class="icon" />
-          {{ "10" }}km/h Wind
+          <b>{{ info.wind_speed }}km/h</b> Wind
         </div>
 
         <div class="item">
           <HumidtyIcon class="icon" />
-          {{ "30" }}% Humidity
+          <b>{{ info.humidity }}%</b> Humidity
         </div>
 
         <div class="item">
           <PressureIcon class="icon" />
-          {{ "1018" }}hPa Pressure
+          <b>{{ info.pressure }}hPa</b> Pressure
         </div>
 
         <div class="item">
           <SunsetIcon class="icon" />
-          {{ "06:47" }}
-          {{ "17:38" }}
+          {{ info.sunrise }} <br />
+          {{ info.sunset }}
         </div>
       </div>
     </div>
@@ -101,7 +100,7 @@ export default {
 
   computed: {
     toggleText() {
-      return this.showMoreInfo ? "Less Info" : "More Info";
+      return !this.showMoreInfo ? "Less Info" : "More Info";
     },
   },
 
@@ -135,6 +134,7 @@ export default {
     &-label {
       font-size: 3rem;
       font-weight: 300;
+      text-transform: capitalize;
     }
   }
 
@@ -150,11 +150,12 @@ export default {
     margin-bottom: 30px;
 
     .label {
-      font-size: 1rem;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
     }
 
     .temp {
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
   }
 
@@ -162,21 +163,29 @@ export default {
     align-items: center;
     display: flex;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     cursor: pointer;
     font-size: 1.5rem;
 
     .icon {
       margin-left: 10px;
       width: 20px;
+      transition: transform .3s;
+    }
+
+    &.open .icon {
+      transform: rotate(180deg);
     }
   }
 
   .more-info {
     display: flex;
+    transition: opacity .3s;
+    opacity: 1;
 
     .item {
       display: flex;
+      flex: 1;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -186,6 +195,10 @@ export default {
         width: 30px;
         margin-bottom: 15px;
       }
+    }
+
+    &.hidden {
+      opacity: 0;
     }
   }
 }
