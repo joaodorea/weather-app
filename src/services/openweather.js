@@ -17,7 +17,12 @@ export const getCityWeatherByPeriod = async (city) => {
 
 function adaptResponse(cityWeatherByPeriod, cityWeather) {
   const dailyWeather = cityWeather.daily.map(item => ({ ...item, weekday: date.getWeekdayName(item.dt) }))
-  
+  cityWeather.current.sunrise = date.getTime2Digit(cityWeather.current.sunrise)
+  cityWeather.current.sunset = date.getTime2Digit(cityWeather.current.sunset)
+  cityWeatherByPeriod.main.temp = Math.round(cityWeatherByPeriod.main.temp)
+  cityWeatherByPeriod.main.temp_min = Math.round(cityWeatherByPeriod.main.temp_min)
+  cityWeatherByPeriod.main.temp_max = Math.round(cityWeatherByPeriod.main.temp_max)
+
   return {
     daily: dailyWeather,
     current: {
