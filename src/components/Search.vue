@@ -5,6 +5,7 @@
       type="text"
       name="location"
       v-model="location"
+      placeholder="São Paulo, BR"
     />
   </form>
 </template>
@@ -60,5 +61,18 @@ export default {
 <style lang="scss" scoped>
 .error {
   border: 1px solid red;
+}
+
+input {
+  border-width: 0 0 2px 0;
+  border-color: black;
+  background-color: transparent;
+  padding: 10px 5px;
+  outline: none;
+  font-size: 1.3rem;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+  }
 }
 </style>
