@@ -6,6 +6,8 @@ const BaseUrl = 'https://api.openweathermap.org/data/2.5'
 export const getCityWeatherByPeriod = async (city) => {
   const cityWeatherByPeriod = await http.get(`${BaseUrl}/weather?q=${city}&exclude=alerts,minutely,hourly&appid=${key}&units=metric`)
 
+  if(cityWeatherByPeriod.message) return cityWeatherByPeriod
+
   const cityWeather = await getCityWeather(cityWeatherByPeriod.coord)
 
   const adaptedWeatherData = adaptResponseWeatherByPeriod(cityWeatherByPeriod, cityWeather)

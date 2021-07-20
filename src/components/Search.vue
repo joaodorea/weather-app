@@ -3,7 +3,7 @@
     <label for="location">Where is your location?</label>
     <fieldset :class="{loading: isLoading}">
       <input
-        :class="{ error: reqError || inputError }"
+        :class="{ error: inputError }"
         type="text"
         name="location"
         id="location"
@@ -11,6 +11,8 @@
         placeholder="São Paulo, BR"
       />
     </fieldset>
+
+    <p class="errorMessage">{{ errorMessage }}</p>
   </form>
 </template>
 
@@ -22,7 +24,7 @@ export default {
   data() {
     return {
       location: "",
-      reqError: false,
+      errorMessage: '',
       isLoading: false
     };
   },
@@ -36,28 +38,33 @@ export default {
 
   watch: {
     location() {
-      this.reqError = false;
+      this.errorMessage = '';
     },
   },
 
   computed: {
     inputError() {
-      const size = this.location.trim.length;
+      const size = this.trimmedLocation.length;
       return size < 4 && size > 0;
     },
+
+    trimmedLocation() {
+      return this.location.trim()
+    }
   },
 
   methods: {
     async submit() {
+      if(this.trimmedLocation.length <= 3) return
+
       this.isLoading = true
-      const resp = await weatherApi.getCityWeatherByPeriod(this.location);
+      const resp = await weatherApi.getCityWeatherByPeriod(this.trimmedLocation);
 
       if (resp.message) {
-        console.log("Error: " + resp.message);
-        this.reqError = true;
+        this.errorMessage = resp.message;
       } else {
         this.onSubmit(resp);
-        this.reqError = false;
+        this.errorMessage = ''
       }
 
       this.isLoading = false
@@ -109,6 +116,12 @@ input {
   &:focus {
     background-color: rgba(255, 190, 35, 0.25);
   }
+}
+
+.errorMessage {
+  margin-top: 10px;
+  text-transform: capitalize;
+  height: 16px;
 }
 
 @keyframes spinning {
