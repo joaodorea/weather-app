@@ -3,6 +3,7 @@
     <input
       :class="{ error: reqError || inputError }"
       type="text"
+      name="location"
       v-model="location"
     />
   </form>
