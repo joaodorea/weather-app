@@ -1,9 +1,11 @@
 <template>
   <form @submit.prevent="submit">
+    <label for="location">Where is your location?</label>
     <input
       :class="{ error: reqError || inputError }"
       type="text"
       name="location"
+      id="location"
       v-model="location"
       placeholder="São Paulo, BR"
     />
@@ -63,6 +65,10 @@ export default {
   border: 1px solid red;
 }
 
+label {
+  display: block;
+}
+
 input {
   border-width: 0 0 2px 0;
   border-color: black;
@@ -73,6 +79,10 @@ input {
 
   &::placeholder {
     color: rgba(0, 0, 0, 0.3);
+  }
+
+  &:focus {
+    background-color: rgba(255, 190, 35, 0.25);
   }
 }
 </style>
