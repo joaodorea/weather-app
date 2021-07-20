@@ -109,20 +109,36 @@ export default {
   text-align: center;
   max-width: 900px;
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 40px;
+  }
+
   .column {
     flex: 1;
   }
 
   .current-state {
+    margin-bottom: 20px;
+
     &-icon {
       max-width: 430px;
       margin-bottom: 15px;
+      width: 100%;
+
+      @media screen and (max-width: 768px) {
+        max-width: 150px;
+      }
     }
 
     &-label {
       font-size: 3rem;
       font-weight: 300;
       text-transform: capitalize;
+
+      @media screen and (max-width: 768px) {
+        font-size: 1.5rem;
+      }
     }
   }
 
@@ -130,12 +146,21 @@ export default {
     font-size: 7rem;
     margin-bottom: 15px;
     font-weight: bold;
+
+    @media screen and (max-width: 768px) {
+      font-size: 3rem;
+    }
   }
 
   .min-and-max {
     display: flex;
     justify-content: space-around;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 768px) {
+      max-width: 150px;
+      margin: auto;
+    }
 
     .label {
       font-size: 1.5rem;
