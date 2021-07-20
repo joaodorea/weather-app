@@ -3,10 +3,6 @@
     <div class="column">
       <div class="current-state">
         <SunIcon class="current-state-icon" />
-        <!-- <CloudRainIcon />
-        <CloudIcon />
-        <SnowIcon />
-        <RainIcon /> -->
         <p class="current-state-label">{{ info.weather[0].description }}</p>
       </div>
     </div>
@@ -31,7 +27,7 @@
         <ArrowUpIcon class="icon" />
       </div>
 
-      <div class="more-info" :class="{hidden: showMoreInfo}">
+      <div class="more-info" :class="{shown: showMoreInfo}">
         <div class="item">
           <WindIcon class="icon" />
           <b>{{ info.wind_speed }}km/h</b> Wind
@@ -60,10 +56,6 @@
 <script>
 import SunIcon from "../assets/imgs/circle-solid.vue";
 import ArrowUpIcon from "../assets/imgs/chevron-up-solid.vue";
-// import CloudRainIcon from "../assets/imgs/cloud-showers-heavy-solid.vue";
-// import CloudIcon from "../assets/imgs/cloud-solid.vue";
-// import SnowIcon from "../assets/imgs/snowflake-solid.vue";
-// import RainIcon from "../assets/imgs/tint-solid.vue";
 import WindIcon from "../assets/imgs/wind-solid.vue";
 import HumidtyIcon from "../assets/imgs/humidity-icon.vue";
 import SunsetIcon from "../assets/imgs/sunset-icon.vue";
@@ -80,10 +72,6 @@ export default {
   components: {
     SunIcon,
     ArrowUpIcon,
-    // CloudRainIcon,
-    // CloudIcon,
-    // SnowIcon,
-    // RainIcon,
     WindIcon,
     HumidtyIcon,
     SunsetIcon,
@@ -100,7 +88,7 @@ export default {
 
   computed: {
     toggleText() {
-      return !this.showMoreInfo ? "Less Info" : "More Info";
+      return this.showMoreInfo ? "Less Info" : "More Info";
     },
   },
 
@@ -171,17 +159,18 @@ export default {
       margin-left: 10px;
       width: 20px;
       transition: transform .3s;
+      transform: rotate(180deg);
     }
 
     &.open .icon {
-      transform: rotate(180deg);
+      transform: rotate(0);
     }
   }
 
   .more-info {
     display: flex;
     transition: opacity .3s;
-    opacity: 1;
+    opacity: 0;
 
     .item {
       display: flex;
@@ -197,8 +186,8 @@ export default {
       }
     }
 
-    &.hidden {
-      opacity: 0;
+    &.shown {
+      opacity: 1;
     }
   }
 }
