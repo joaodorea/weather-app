@@ -20,5 +20,18 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Next Realses
+- Use Nuxt.js and hide the API token
+- Use Vuex to make the components cleaner
+- Improve the API util
+- Use typescript and/or tests
+- Let the user decide the lang and the "types"
+- Loading, error messages
+
+URL to the project: [click here](https://weather-app-rose-phi.vercel.app/)!
+
+## Credits
+
+Icons used from [FontAwesome](https://fontawesome.com/)
+[Assignment url](https://gitlab.com/tinkerlist/tech-assignment-front-end)
+[Weather API](https://openweathermap.org/)
