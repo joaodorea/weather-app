@@ -1,19 +1,31 @@
 <template>
   <div id="app">
-    <Search :onSubmit="onSubmit" />
-    <Weather v-if="weatherInfo" :info="weatherInfo" />
+    <div class="wrapper">
+      <Search :onSubmit="onSubmit" />
+
+      <template v-if="weatherInfo">
+        <Weather :info="weatherInfo.current" />
+
+        <div class="carousel">
+          <WeatherSumaryList :info="weatherInfo.previousWeather" />
+          <WeatherSumaryList :info="weatherInfo.daily" />
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
 import Search from './components/Search.vue'
 import Weather from './components/Weather.vue'
+import WeatherSumaryList from './components/WeatherSumaryList.vue'
 
 export default {
   name: 'App',
   components: {
     Search,
-    Weather
+    Weather,
+    WeatherSumaryList
   },
 
   data(){
@@ -30,13 +42,23 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  min-height: 100vh;
+  padding: 30px 30px;
+  background-color: #FCE19C;
+
+  .wrapper {
+    max-width: 1200px;
+    margin: auto;
+
+    .carousel {
+      display: flex;
+      overflow-y: auto;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
 }
 </style>
