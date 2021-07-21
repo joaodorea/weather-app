@@ -42,7 +42,14 @@ export default {
 
   computed: {
     bgColor() {
-      return this.weatherInfo ? '#FCE19C' : '#F8A797'
+      if(!this.weatherInfo) return '#F8A797'
+      
+      const main = this.weatherInfo.current.weather[0].main
+
+      if(main === 'Clouds') return '#F0F1F2'
+      else if(main === 'Snow') return '#D4D9E0'
+      else if(main === 'Clear') return '#FCE19C'
+      else return '#9CC2FC'
     }
   },
 

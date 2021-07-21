@@ -2,7 +2,7 @@
   <div id="weather">
     <div class="column">
       <div class="current-state">
-        <SunIcon class="current-state-icon" />
+        <WeatherIcon class="current-state-icon" :weather="info.weather[0].main" />
         <p class="current-state-label">{{ info.weather[0].description }}</p>
       </div>
     </div>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import SunIcon from "../assets/imgs/circle-solid.vue";
+import WeatherIcon from "./WeatherIcon.vue"
 import ArrowUpIcon from "../assets/imgs/chevron-up-solid.vue";
 import WindIcon from "../assets/imgs/wind-solid.vue";
 import HumidtyIcon from "../assets/imgs/humidity-icon.vue";
@@ -70,7 +70,7 @@ export default {
   },
 
   components: {
-    SunIcon,
+    WeatherIcon,
     ArrowUpIcon,
     WindIcon,
     HumidtyIcon,
@@ -81,8 +81,7 @@ export default {
   props: {
     info: {
       type: Object,
-      // required: true
-      default: () => {},
+      required: true
     },
   },
 
@@ -123,11 +122,16 @@ export default {
 
     &-icon {
       max-width: 430px;
+      max-height: 430px;
       margin-bottom: 15px;
       width: 100%;
 
       @media screen and (max-width: 768px) {
         max-width: 150px;
+      }
+
+      svg {
+        height: 100%;
       }
     }
 
