@@ -5,7 +5,7 @@
       <p>{{ item.isToday ? 'Today' : item.weekday }}</p>
 
       <div class="card" :class="{ isToday: item.isToday }">
-        <SunsetIcon />
+        <WeatherIcon class="icon" :weather="getWeatherMain(item)" />
         <p class="max">{{ item.temp.max }}º</p>
         <p class="min">{{ item.temp.min }}º</p>
       </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import SunsetIcon from '../assets/imgs/sunset-icon.vue'
+import WeatherIcon from './WeatherIcon.vue'
 
 export default {
   name: 'WeatherSumaryList',
@@ -23,12 +23,19 @@ export default {
     return {}
   },
   
-  components: { SunsetIcon },
+  components: { WeatherIcon },
 
   props: {
     info: {
       type: Array,
       required: true
+    }
+  },
+
+  methods: {
+    getWeatherMain(item) {
+      if(item.current) return item.current.weather[0].main
+      else return item.weather[0].main
     }
   }
 }
@@ -57,6 +64,11 @@ export default {
 
       .min {
         margin-top: 8px;
+      }
+
+      .icon {
+        max-width: 30px;
+        max-height: 30px;
       }
 
       &.isToday {
