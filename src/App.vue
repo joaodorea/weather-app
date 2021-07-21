@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{backgroundColor: bgColor}">
     <div class="wrapper">
       <Search :onSubmit="onSubmit" />
 
@@ -11,6 +11,10 @@
           <WeatherSumaryList :info="weatherInfo.daily" />
         </div>
       </template>
+
+      <template v-else>
+        <InitialHero />
+      </template>
     </div>
   </div>
 </template>
@@ -19,18 +23,26 @@
 import Search from './components/Search.vue'
 import Weather from './components/Weather.vue'
 import WeatherSumaryList from './components/WeatherSumaryList.vue'
+import InitialHero from './components/InitialHero.vue'
 
 export default {
   name: 'App',
   components: {
     Search,
     Weather,
-    WeatherSumaryList
+    WeatherSumaryList,
+    InitialHero
   },
 
   data(){
     return {
       weatherInfo: null
+    }
+  },
+
+  computed: {
+    bgColor() {
+      return this.weatherInfo ? '#FCE19C' : '#F8A797'
     }
   },
 
@@ -46,7 +58,7 @@ export default {
 #app {
   min-height: 100vh;
   padding: 30px 30px;
-  background-color: #FCE19C;
+  transition: background-color .3s;
 
   .wrapper {
     max-width: 1200px;
