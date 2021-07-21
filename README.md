@@ -20,13 +20,12 @@ npm run build
 npm run lint
 ```
 
-## Next Realses
+## Next Releases
 - Use Nuxt.js and hide the API token
 - Use Vuex to make the components cleaner
 - Improve the API util
 - Use typescript and/or tests
 - Let the user decide the lang and the "types"
-- Loading, error messages
 - Store the search location on query
 
 URL to the project: [click here](https://weather-app-rose-phi.vercel.app/)!
