@@ -27,6 +27,7 @@ npm run lint
 - Use typescript and/or tests
 - Let the user decide the lang and the "types"
 - Loading, error messages
+- Store the search location on query
 
 URL to the project: [click here](https://weather-app-rose-phi.vercel.app/)!
 
@@ -35,3 +36,7 @@ URL to the project: [click here](https://weather-app-rose-phi.vercel.app/)!
 Icons used from [FontAwesome](https://fontawesome.com/)
 [Assignment url](https://gitlab.com/tinkerlist/tech-assignment-front-end)
 [Weather API](https://openweathermap.org/)
+
+
+### Icons
+Umbrella - [Alfredo Hernandez](https://www.flaticon.com/authors/alfredo-hernandez)
